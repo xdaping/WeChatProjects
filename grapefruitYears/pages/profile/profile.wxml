@@ -1,0 +1,82 @@
+<view class="page">
+  <!-- 未登录：邮箱注册 / 登录入口 -->
+  <block wx:if="{{!profile.loggedIn}}">
+    <view class="guest" style="padding-top:{{statusBarHeight}}px">
+      <view class="guest-top" style="height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px">
+        <view class="hero-ico"></view>
+        <view class="hero-ico" bindtap="share">✈️</view>
+      </view>
+      <view class="logo-ring">
+        <view class="logo-face">
+          <view class="hand-h"></view>
+          <view class="hand-m"></view>
+        </view>
+      </view>
+      <view class="brand-name">岁月</view>
+      <view class="brand-sub">岁月 ID 账号登录</view>
+      <view class="auth-btn green" bindtap="goRegister">注册</view>
+      <view class="auth-btn blue" bindtap="goLogin">登录</view>
+    </view>
+  </block>
+
+  <!-- 已登录：头像 + 昵称 -->
+  <block wx:else>
+    <view class="hero">
+      <view class="sun"></view>
+      <view class="hill hill-1"></view>
+      <view class="hill hill-2"></view>
+      <view class="tree t1"></view>
+      <view class="tree t2"></view>
+      <view class="tree t3"></view>
+      <view class="house"></view>
+
+      <view class="hero-top" style="height:{{navBarHeight}}px;margin-top:{{statusBarHeight}}px;padding-right:{{capsuleRight}}px">
+        <view class="hero-ico" bindtap="editName">👤</view>
+        <view class="hero-ico" bindtap="share">✈️</view>
+      </view>
+
+      <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image wx:if="{{profile.avatar}}" class="avatar" src="{{profile.avatar}}" mode="aspectFill" />
+        <view wx:else class="avatar avatar-ph">🧀</view>
+      </button>
+    </view>
+
+    <view class="ident">
+      <view class="nick" bindtap="editName">{{profile.nickName}}</view>
+      <view class="handle">{{profile.email}}</view>
+    </view>
+  </block>
+
+  <view class="quads">
+    <view class="quad" bindtap="goSettings">
+      <text class="q-ico">⚙️</text>
+      <text class="q-t">设置</text>
+    </view>
+    <view class="quad" bindtap="openInbox">
+      <text class="q-ico">✉️</text>
+      <text class="q-t">收件箱</text>
+      <view class="q-badge" wx:if="{{profile.inbox > 0}}">{{profile.inbox}}</view>
+    </view>
+    <view class="quad" bindtap="sponsor">
+      <text class="q-ico">🐷</text>
+      <text class="q-t">赞助</text>
+    </view>
+    <view class="quad" bindtap="goProjects">
+      <text class="q-ico">📋</text>
+      <text class="q-t">清单</text>
+    </view>
+  </view>
+
+  <view class="pro" bindtap="upgrade">
+    <view class="pro-left">
+      <text class="crown">👑</text>
+      <view>
+        <view class="pro-t">{{profile.pro ? '高级会员已开通' : '升级高级会员'}} ✦ ✧</view>
+        <view class="pro-s">{{profile.pro ? '感谢支持，所有高级功能已解锁' : '即刻解锁高级功能'}}</view>
+      </view>
+    </view>
+    <view class="pro-btn">{{profile.pro ? '已开通' : '即刻升级'}}</view>
+  </view>
+
+  <view style="height:180rpx"></view>
+</view>

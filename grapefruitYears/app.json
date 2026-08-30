@@ -1,24 +1,51 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/projects/projects",
+    "pages/focus/focus",
+    "pages/stats/stats",
+    "pages/profile/profile",
+    "pages/project-detail/project-detail",
+    "pages/project-edit/project-edit",
+    "pages/settings/settings",
+    "pages/auth/auth",
+    "pages/report/report"
   ],
   "window": {
+    "backgroundColor": "#f2f3f5",
+    "backgroundTextStyle": "light",
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom"
   },
-  "style": "v2",
-  "renderer": "skyline",
-  "rendererOptions": {
-    "skyline": {
-      "defaultDisplayBlock": true,
-      "defaultContentBox": true,
-      "tagNameStyleIsolation": "legacy",
-      "disableABTest": true,
-      "sdkVersionBegin": "3.0.0",
-      "sdkVersionEnd": "15.255.255"
-    }
+  "tabBar": {
+    "custom": true,
+    "color": "#9aa0a6",
+    "selectedColor": "#007aff",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "计划"
+      },
+      {
+        "pagePath": "pages/projects/projects",
+        "text": "项目"
+      },
+      {
+        "pagePath": "pages/focus/focus",
+        "text": "专注"
+      },
+      {
+        "pagePath": "pages/stats/stats",
+        "text": "统计"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
   },
-  "componentFramework": "glass-easel",
+  "style": "v2",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
 }

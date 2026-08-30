@@ -1,0 +1,90 @@
+<view class="page" style="padding-top:{{statusBarHeight}}px">
+  <view class="nav" style="height:{{navBarHeight}}px">
+    <view class="back" bindtap="back">‹</view>
+    <view class="title">设置</view>
+    <view class="back"></view>
+  </view>
+
+  <!-- 账号 -->
+  <view class="card">
+    <view class="section-title">账号</view>
+    <block wx:if="{{profile.loggedIn}}">
+      <view class="pr">
+        <text class="grow">登录邮箱</text>
+        <text class="pr-v">{{profile.email}}</text>
+      </view>
+      <view class="pr">
+        <text class="grow">昵称</text>
+        <text class="pr-v">{{profile.nickName}}</text>
+      </view>
+      <view class="pr">
+        <text class="grow">云同步</text>
+        <text class="pr-v">{{syncText}}</text>
+      </view>
+      <view class="op" bindtap="syncNow">立即同步</view>
+      <view class="op" bindtap="diagnose">同步诊断</view>
+      <view class="op" bindtap="changePassword">修改密码</view>
+      <view class="op danger" bindtap="logout">退出登录</view>
+    </block>
+    <block wx:else>
+      <view class="sub">还没有登录，注册岁月 ID 后可在任意设备登录，保留昵称头像与会员权益</view>
+      <view class="op" bindtap="goRegister">邮箱注册</view>
+      <view class="op" bindtap="goLogin">已有账号，登录</view>
+    </block>
+  </view>
+
+  <view class="card">
+    <view class="row between">
+      <view>
+        <view class="label">每日定时提醒</view>
+        <view class="sub">每天固定时间提醒你记录时间投入</view>
+      </view>
+      <switch checked="{{settings.remindOn}}" color="#34c759" bindchange="onRemind" />
+    </view>
+    <view class="divider"></view>
+    <view class="row between">
+      <view>
+        <view class="label">专注期间保持亮屏</view>
+        <view class="sub">默认关闭，关闭时熄屏跟随手机自身设置</view>
+      </view>
+      <switch checked="{{settings.keepScreenOn}}" color="#34c759" bindchange="onKeepScreen" />
+    </view>
+    <block wx:if="{{settings.remindOn}}">
+      <view class="divider"></view>
+      <view class="row between">
+        <text class="label">提醒时间</text>
+        <picker mode="time" value="{{settings.remindAt}}" bindchange="onRemindTime">
+          <view class="pick">{{settings.remindAt}} ›</view>
+        </picker>
+      </view>
+    </block>
+  </view>
+
+  <view class="card">
+    <view class="section-title">项目提醒</view>
+    <view class="pr" wx:for="{{projects}}" wx:key="index">
+      <text class="pr-ico">{{item.icon}}</text>
+      <text class="grow">{{item.name}}</text>
+      <text class="pr-v">{{item.remindOn ? item.remindAt : '未开启'}}</text>
+      <text class="chev" data-id="{{item.id}}" bindtap="editProject">›</text>
+    </view>
+    <view class="empty" wx:if="{{projects.length === 0}}">还没有项目</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">数据</view>
+    <view class="op" bindtap="seedDemo">载入示例数据（近 90 天）</view>
+    <view class="op" bindtap="exportData">导出数据到剪贴板</view>
+    <view class="op danger" bindtap="clearAll">清空所有数据{{profile.loggedIn ? '（含云端）' : ''}}</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">关于</view>
+    <view class="sub">岁月 · 光阴计算（小程序初版）</view>
+    <view class="sub">记录背单词、练琴、看书、Coding 等需要时间累积的技能</view>
+    <view class="sub">支持正/倒计时、每日提醒、长达 10 年的时间规划</view>
+    <view class="sub">账号与数据存在微信云开发；未登录时项目和记录只在本机</view>
+  </view>
+
+  <view style="height:80rpx"></view>
+</view>

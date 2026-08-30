@@ -1,0 +1,95 @@
+<view class="page" style="padding-top:{{statusBarHeight}}px">
+  <view class="nav" style="height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px">
+    <view class="back" bindtap="back">‹</view>
+    <view class="title">{{isEdit ? '编辑项目' : (parentName ? '添加小项目' : '添加新项目')}}</view>
+    <view class="nav-pad"></view>
+  </view>
+
+  <view class="card preview">
+    <view class="pv-icon" style="background:{{form.color}}1a">{{form.icon}}</view>
+    <view class="grow">
+      <view class="pv-name">{{form.name || '未命名项目'}}</view>
+      <view class="sub">{{parentName ? '隶属于 ' + parentName + ' · ' : ''}}目标 {{form.targetHours}} 小时 · 已投入 {{totalHours}} 小时</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="field">
+      <text class="label">项目名称</text>
+      <input class="input" placeholder="{{parentName ? '如：单词书第一册 / 音阶练习' : '如：背单词 / 练琴 / 看书 / Coding'}}" value="{{form.name}}" bindinput="onName" />
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="label">选择图标</view>
+    <view class="grid">
+      <view
+        class="cell {{form.icon === item ? 'on' : ''}}"
+        wx:for="{{icons}}"
+        wx:key="*this"
+        data-icon="{{item}}"
+        bindtap="onIcon"
+      >{{item}}</view>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="label">主题颜色</view>
+    <view class="colors">
+      <view
+        class="color {{form.color === item ? 'on' : ''}}"
+        wx:for="{{colors}}"
+        wx:key="*this"
+        style="background:{{item}}"
+        data-color="{{item}}"
+        bindtap="onColor"
+      ></view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="label">目标小时（支持长达 10 年的时间规划）</view>
+    <view class="chips">
+      <view
+        class="chip {{form.targetHours === item ? 'on' : ''}}"
+        wx:for="{{targets}}"
+        wx:key="*this"
+        data-value="{{item}}"
+        bindtap="onTarget"
+      >{{item}}h</view>
+    </view>
+    <view class="field">
+      <text class="label">自定义目标</text>
+      <input class="input right" type="number" value="{{form.targetHours}}" bindinput="onTargetInput" />
+    </view>
+    <view class="divider"></view>
+    <view class="sub">按最近的投入速度，预计 {{etaText}} 达成目标</view>
+  </view>
+
+  <view class="card">
+    <view class="row between">
+      <view>
+        <view class="label">每日定时提醒</view>
+        <view class="sub">到点提醒你为这个项目投入时间</view>
+      </view>
+      <switch checked="{{form.remindOn}}" color="#34c759" bindchange="onRemind" />
+    </view>
+    <block wx:if="{{form.remindOn}}">
+      <view class="divider"></view>
+      <view class="row between">
+        <text class="label">提醒时间</text>
+        <picker mode="time" value="{{form.remindAt}}" bindchange="onRemindTime">
+          <view class="picker-val">{{form.remindAt}} ›</view>
+        </picker>
+      </view>
+    </block>
+  </view>
+
+  <view class="card danger" wx:if="{{isEdit}}" bindtap="remove">删除项目</view>
+  <view style="height:220rpx"></view>
+
+  <!-- 保存放在底部，避开右上角的微信胶囊按钮 -->
+  <view class="footer">
+    <view class="save-btn" bindtap="save">保存{{isEdit ? '' : (parentName ? '小项目' : '项目')}}</view>
+  </view>
+</view>

@@ -1,0 +1,261 @@
+<view class="page" style="padding-top:{{statusBarHeight}}px">
+  <view class="nav" style="height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px">
+    <view class="nav-title">岁月<text class="light"> · 我的统计</text></view>
+    <view class="nav-actions">
+      <view class="report" bindtap="showReport">🏅 成绩单</view>
+    </view>
+  </view>
+
+  <!-- 总览 -->
+  <view class="card">
+    <view class="ov">
+      <view class="ov-i">
+        <view class="ov-n">{{ov.count}}</view>
+        <view class="ov-l">总记录数</view>
+      </view>
+      <view class="ov-i">
+        <view class="ov-n">{{ov.totalHours}}<text class="unit">h</text></view>
+        <view class="ov-l">总时间</view>
+      </view>
+      <view class="ov-i">
+        <view class="ov-n">{{ov.weeklyHours}}<text class="unit">h</text></view>
+        <view class="ov-l">平均每周</view>
+      </view>
+      <view class="ov-i">
+        <view class="ov-n">{{ov.last7Hours}}<text class="unit">h</text></view>
+        <view class="ov-l">最近 7 天</view>
+      </view>
+    </view>
+
+    <view class="months">
+      <view class="m-row" wx:for="{{months}}" wx:key="key">
+        <view class="m-label">{{item.label}}</view>
+        <view class="m-cells">
+          <view class="m-cell l{{cell.level}}" wx:for="{{item.days}}" wx:for-item="cell" wx:key="key"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 时空怪兽 -->
+  <view class="card monster">
+    <view class="row between">
+      <view class="section-title">我的时空怪兽图鉴</view>
+      <view class="muted">{{monster.hatched}}</view>
+    </view>
+    <view class="row">
+      <view class="egg">🥚</view>
+      <view class="grow">
+        <view class="m-line">专注时长总计：<text class="strong">{{monster.totalHours}}</text> 小时</view>
+        <view class="m-line">距离孵化还要专注 <text class="strong orange">{{monster.needHours}}</text> 小时</view>
+        <view class="bar">
+          <view class="bar-in green" style="width:{{monster.progress}}%"></view>
+        </view>
+        <view class="scale">
+          <text wx:for="{{monsterScale}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 成就 -->
+  <view class="card">
+    <view class="row between">
+      <view class="section-title">我的成就</view>
+      <view class="muted">{{achv.unlocked}}</view>
+    </view>
+    <view class="achv">
+      <view class="a-i {{item.done ? 'on' : ''}}" wx:for="{{achv.list}}" wx:key="name">
+        <view class="a-ico">{{item.done ? item.icon : ''}}</view>
+        <view class="a-n">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 每日统计 -->
+  <view class="card">
+    <view class="row between day-head">
+      <view class="section-title nomb">每日统计</view>
+      <view class="row day-nav">
+        <text class="nav-btn" bindtap="prevDay">‹</text>
+        <text class="day-text">{{daily.dateText}}</text>
+        <text class="nav-btn {{daily.isToday ? 'off' : ''}}" bindtap="nextDay">›</text>
+      </view>
+      <button class="share-btn" open-type="share">✈️ 分享</button>
+    </view>
+
+    <view class="chip-wrap" wx:if="{{daily.topChip}}">
+      <text class="chip-lab">{{daily.topChip}}</text>
+    </view>
+
+    <view class="donut" style="background:{{daily.gradient}}">
+      <view class="donut-in">
+        <view class="donut-t">今日总投入</view>
+        <view class="donut-n">{{daily.totalHours}}</view>
+        <view class="donut-u">小时</view>
+      </view>
+    </view>
+
+    <view class="chip-wrap" wx:if="{{daily.bottomChip}}">
+      <text class="chip-lab">{{daily.bottomChip}}</text>
+    </view>
+
+    <view class="seg-grid" wx:if="{{daily.segments.length}}">
+      <view class="seg" wx:for="{{daily.segments}}" wx:key="index">
+        <view class="row">
+          <text class="seg-ico">{{item.icon}}</text>
+          <text class="seg-n grow">{{item.name}}</text>
+          <text class="seg-h">{{item.hours}}<text class="seg-u"> 小时</text></text>
+        </view>
+        <view class="row seg-bar-row">
+          <view class="seg-bar">
+            <view class="seg-bar-in" style="width:{{item.percent}}%;background:{{item.color}}"></view>
+          </view>
+          <text class="seg-p" style="color:{{item.color}}">{{item.percent}}%</text>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:else>这一天还没有记录</view>
+
+    <view class="divider"></view>
+    <view class="section-title">专注投入</view>
+    <view class="track">
+      <view
+        class="mark"
+        wx:for="{{daily.timeline}}"
+        wx:key="index"
+        style="left:{{item.left}}%;width:{{item.width}}%;background:{{item.color}}"
+      ></view>
+    </view>
+    <view class="axis">
+      <text>00:00</text><text>06:00</text><text>12:00</text><text>18:00</text><text>24:00</text>
+    </view>
+  </view>
+
+  <!-- 专注时间表 -->
+  <view class="card">
+    <view class="row between" bindtap="toggleSchedule">
+      <view class="section-title nomb">专注时间表</view>
+      <text class="chev">{{scheduleDays === 7 ? '›' : '⌄'}}</text>
+    </view>
+    <view class="sch-row" wx:for="{{schedule}}" wx:key="key">
+      <text class="sch-lab">{{item.label}}</text>
+      <view class="track sch-track">
+        <view
+          class="mark"
+          wx:for="{{item.marks}}"
+          wx:for-item="mk"
+          wx:key="index"
+          style="left:{{mk.left}}%;width:{{mk.width}}%;background:{{mk.color}}"
+        ></view>
+      </view>
+    </view>
+    <view class="axis sch-axis">
+      <text>00:00</text><text>12:00</text><text>24:00</text>
+    </view>
+  </view>
+
+  <!-- 投入趋势 -->
+  <view class="card">
+    <view class="tabs">
+      <view
+        class="tab {{trend === item.key ? 'on' : ''}}"
+        wx:for="{{trendTabs}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        bindtap="switchTrend"
+      >{{item.text}}</view>
+    </view>
+
+    <view class="chart" wx:if="{{series.length}}">
+      <view class="c-col" wx:for="{{series}}" wx:key="key">
+        <view class="c-val">{{item.text}}</view>
+        <view class="c-bar" style="height:{{item.height}}%;background:{{item.height > 0 ? '#007aff' : '#eceef0'}}"></view>
+        <view class="c-lab">{{item.label}}</view>
+      </view>
+    </view>
+    <view class="empty" wx:else>最近没有记录</view>
+    <view class="sub center">{{trendSummary}}</view>
+  </view>
+
+  <!-- 时间分布 -->
+  <view class="card">
+    <view class="section-title">统计 · 投入时间分布</view>
+    <view class="tabs small">
+      <view
+        class="tab {{scope === item.key ? 'on' : ''}}"
+        wx:for="{{scopeTabs}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        bindtap="switchScope"
+      >{{item.text}}</view>
+    </view>
+
+    <view class="range" wx:if="{{scope === 'custom'}}">
+      <picker mode="date" value="{{customFrom}}" end="{{customTo}}" bindchange="onFrom">
+        <view class="range-v">{{customFrom}}</view>
+      </picker>
+      <text class="range-to">至</text>
+      <picker mode="date" value="{{customTo}}" start="{{customFrom}}" bindchange="onTo">
+        <view class="range-v">{{customTo}}</view>
+      </picker>
+    </view>
+
+    <view class="dist-days">在「岁月」记录时间的 <text class="strong">{{dist.dayCount}}</text> 天</view>
+
+    <block wx:if="{{dist.rows.length}}">
+      <view class="chip-wrap" wx:if="{{dist.topChip}}">
+        <text class="chip-lab">{{dist.topChip}}</text>
+      </view>
+
+      <view class="donut" style="background:{{dist.gradient}}">
+        <view class="donut-in">
+          <view class="donut-t">{{dist.centerLabel}}</view>
+          <view class="donut-n">{{dist.totalHours}}</view>
+          <view class="donut-u">小时</view>
+        </view>
+      </view>
+
+      <view class="chip-wrap" wx:if="{{dist.bottomChip}}">
+        <text class="chip-lab">{{dist.bottomChip}}</text>
+      </view>
+
+      <view class="d-group" wx:for="{{dist.rows}}" wx:key="index">
+        <view class="row between" data-id="{{item.id}}" bindtap="openProject">
+          <view class="row">
+            <text class="d-ico">{{item.icon}}</text>
+            <text class="d-n">{{item.name}}</text>
+          </view>
+          <text class="d-v">{{item.hours}}<text class="d-u"> 小时</text></text>
+        </view>
+        <view class="row seg-bar-row">
+          <view class="seg-bar">
+            <view class="seg-bar-in" style="width:{{item.percent}}%;background:{{item.color}}"></view>
+          </view>
+          <text class="seg-p" style="color:{{item.color}}">{{item.percent}}%</text>
+        </view>
+
+        <!-- 小项目拆分 -->
+        <view class="seg-grid sub-grid" wx:if="{{item.children.length}}">
+          <view class="seg" wx:for="{{item.children}}" wx:for-item="kid" wx:key="index">
+            <view class="row">
+              <text class="seg-ico">{{kid.icon}}</text>
+              <text class="seg-n grow">{{kid.name}}</text>
+              <text class="seg-h">{{kid.hours}}<text class="seg-u"> 小时</text></text>
+            </view>
+            <view class="row seg-bar-row">
+              <view class="seg-bar">
+                <view class="seg-bar-in" style="width:{{kid.percent}}%;background:{{kid.color}}"></view>
+              </view>
+              <text class="seg-p" style="color:{{kid.color}}">{{kid.percent}}%</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="empty" wx:else>这个区间还没有记录</view>
+  </view>
+
+  <view style="height:160rpx"></view>
+</view>

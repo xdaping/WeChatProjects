@@ -1,0 +1,418 @@
+/* pages/focus/focus.wxss */
+.focus-page {
+  position: relative;
+  min-height: 100vh;
+  color: #fff;
+}
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(120% 60% at 20% 0%, #ffd89b 0%, rgba(255, 216, 155, 0) 55%),
+    radial-gradient(90% 50% at 90% 10%, #7ab8ff 0%, rgba(122, 184, 255, 0) 60%),
+    linear-gradient(180deg, #123a63 0%, #1b2a4a 55%, #402a2a 100%);
+}
+
+.nav {
+  position: relative;
+  align-items: flex-start;
+}
+.nav-ico {
+  width: 60rpx;
+  font-size: 40rpx;
+  color: #fff;
+  opacity: 0.9;
+}
+.head {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+}
+.head-title {
+  font-size: 40rpx;
+  font-weight: 800;
+}
+.head-title .light {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+}
+.head-sub {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 6rpx;
+}
+
+/* 设置面板 */
+.panel {
+  margin: 40rpx 32rpx 0;
+  background: #fff;
+  border-radius: 32rpx;
+  padding: 28rpx;
+  color: var(--text);
+  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.18);
+}
+.picker-project {
+  background: #f6f7f9;
+  border-radius: 20rpx;
+  padding: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+}
+.pp-icon {
+  font-size: 34rpx;
+}
+.pp-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--brand);
+}
+.pp-chev {
+  color: var(--text-3);
+  font-size: 30rpx;
+}
+
+.modes {
+  display: flex;
+  background: #f0f1f3;
+  border-radius: 999rpx;
+  padding: 6rpx;
+  margin: 24rpx 0 12rpx;
+}
+.mode {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  color: var(--text-2);
+}
+.mode.on {
+  background: #fff;
+  color: var(--orange);
+  font-weight: 700;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+
+.dur {
+  background: #f6f7f9;
+  border-radius: 24rpx;
+  padding: 10rpx 0;
+}
+.pv {
+  height: 300rpx;
+}
+.pv-item {
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: var(--text-2);
+}
+.dur-up {
+  background: #f6f7f9;
+  border-radius: 24rpx;
+  height: 300rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dur-up-text {
+  color: var(--text-3);
+  font-size: 30rpx;
+}
+
+.start {
+  margin-top: 28rpx;
+  background: var(--green);
+  color: #fff;
+  border-radius: 999rpx;
+  text-align: center;
+  padding: 28rpx 0;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+/* 快速开始 */
+.quick {
+  margin: 32rpx 24rpx 0;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 28rpx;
+  padding: 18rpx;
+}
+.quick-title {
+  text-align: center;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 14rpx;
+}
+.quick-row {
+  display: flex;
+  gap: 12rpx;
+}
+.q {
+  flex: 1;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 16rpx;
+  padding: 16rpx 0;
+  font-size: 24rpx;
+  color: #fff;
+}
+
+/* 底部工具 */
+.bottom {
+  display: flex;
+  align-items: stretch;
+  gap: 16rpx;
+  margin: 40rpx 24rpx 0;
+}
+.ambient {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 24rpx;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.amb-ico {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 999rpx;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+}
+.amb-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+.amb-val {
+  font-size: 28rpx;
+  font-weight: 700;
+}
+.future {
+  width: 180rpx;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 24rpx;
+  padding: 14rpx;
+  text-align: center;
+}
+.future-t {
+  font-size: 20rpx;
+  letter-spacing: 2rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+.future-n {
+  font-size: 48rpx;
+  font-weight: 800;
+  line-height: 56rpx;
+}
+.future-s {
+  font-size: 18rpx;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* 计时中 */
+.ring-wrap {
+  margin-top: 60rpx;
+  text-align: center;
+}
+.ring {
+  width: 520rpx;
+  height: 520rpx;
+  border-radius: 999rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ring-in {
+  width: 452rpx;
+  height: 452rpx;
+  border-radius: 999rpx;
+  background: rgba(18, 34, 56, 0.72);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ring-mode {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.75);
+}
+.ring-time {
+  font-size: 76rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+  margin: 10rpx 0;
+}
+.ring-project {
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+.ring-meta {
+  margin-top: 30rpx;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.run-actions {
+  display: flex;
+  gap: 20rpx;
+  margin: 60rpx 32rpx 0;
+}
+.run-btn {
+  flex: 1;
+  text-align: center;
+  padding: 26rpx 0;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.24);
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.run-btn.ghost {
+  background: rgba(0, 0, 0, 0.24);
+  color: rgba(255, 255, 255, 0.8);
+}
+.run-btn.done {
+  background: var(--green);
+}
+
+/* 右下角：高级设置入口 */
+.adv-entry {
+  width: 180rpx;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 24rpx;
+  padding: 18rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.adv-ico {
+  font-size: 42rpx;
+  line-height: 50rpx;
+}
+.adv-t {
+  font-size: 24rpx;
+  color: #fff;
+  margin-top: 6rpx;
+}
+
+/* 高级设置面板 */
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 200;
+}
+.adv-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 201;
+  background: #f2f3f5;
+  color: var(--text);
+  border-radius: 36rpx 36rpx 0 0;
+  padding: 32rpx 24rpx;
+  /* tab 页底部有自定义 tabBar（独立图层），要多留出它的高度 */
+  padding-bottom: calc(150rpx + env(safe-area-inset-bottom));
+}
+.adv-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+.adv-title {
+  font-size: 42rpx;
+  font-weight: 800;
+}
+.adv-close {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 52rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  background: #e2e4e7;
+  color: #8a9096;
+  font-size: 28rpx;
+}
+.adv-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+.adv-card {
+  width: calc(50% - 10rpx);
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  min-height: 200rpx;
+}
+.adv-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.c-ico {
+  font-size: 52rpx;
+  line-height: 60rpx;
+}
+.c-box {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 12rpx;
+  border: 4rpx solid #dcdfe2;
+  text-align: center;
+  line-height: 44rpx;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.c-box.on {
+  background: var(--green);
+  border-color: var(--green);
+}
+.c-pro {
+  background: var(--green);
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 700;
+  border-radius: 999rpx;
+  padding: 10rpx 20rpx;
+}
+.c-t {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin: 16rpx 0 6rpx;
+}
+.c-s {
+  font-size: 20rpx;
+  color: var(--text-3);
+  line-height: 28rpx;
+}
+.c-link {
+  font-size: 22rpx;
+  color: var(--brand);
+  font-weight: 600;
+}
+.adv-done {
+  margin: 32rpx 60rpx 0;
+  background: #24c04a;
+  color: #fff;
+  border-radius: 999rpx;
+  text-align: center;
+  padding: 26rpx 0;
+  font-size: 34rpx;
+  font-weight: 700;
+}

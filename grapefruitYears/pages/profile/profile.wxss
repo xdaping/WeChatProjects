@@ -1,0 +1,276 @@
+/* pages/profile/profile.wxss */
+.hero {
+  position: relative;
+  height: 480rpx;
+  overflow: hidden;
+  background: linear-gradient(180deg, #8fd0ff 0%, #cfeaff 60%, #eaf7ff 100%);
+}
+.sun {
+  position: absolute;
+  top: 70rpx;
+  left: 50%;
+  margin-left: -46rpx;
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 999rpx;
+  background: #fffbe8;
+  box-shadow: 0 0 60rpx rgba(255, 251, 232, 0.9);
+}
+.hill {
+  position: absolute;
+  border-radius: 50% 50% 0 0;
+}
+.hill-1 {
+  left: -20%;
+  bottom: 120rpx;
+  width: 90%;
+  height: 300rpx;
+  background: #7ad19a;
+}
+.hill-2 {
+  right: -20%;
+  bottom: 120rpx;
+  width: 90%;
+  height: 260rpx;
+  background: #63c489;
+}
+.tree {
+  position: absolute;
+  bottom: 210rpx;
+  width: 0;
+  height: 0;
+  border-left: 30rpx solid transparent;
+  border-right: 30rpx solid transparent;
+  border-bottom: 90rpx solid #2f8f5b;
+}
+.tree.t1 { left: 90rpx; }
+.tree.t2 { left: 170rpx; border-bottom-color: #37a267; bottom: 190rpx; }
+.tree.t3 { right: 130rpx; border-bottom-color: #2f8f5b; }
+.house {
+  position: absolute;
+  right: 240rpx;
+  bottom: 214rpx;
+  width: 56rpx;
+  height: 44rpx;
+  background: #ffffff;
+  border-radius: 6rpx;
+}
+.house::before {
+  content: '';
+  position: absolute;
+  top: -26rpx;
+  left: -6rpx;
+  border-left: 34rpx solid transparent;
+  border-right: 34rpx solid transparent;
+  border-bottom: 26rpx solid #e9eef2;
+}
+
+.hero-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+}
+.hero-ico {
+  font-size: 40rpx;
+  opacity: 0.7;
+}
+
+.avatar-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 40rpx;
+  margin-left: -136rpx;
+  width: 272rpx;
+  height: 272rpx;
+  padding: 0;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  z-index: 3;
+}
+.avatar-btn::after {
+  border: none;
+}
+.avatar {
+  width: 272rpx;
+  height: 272rpx;
+  border-radius: 999rpx;
+  background: #35a3ff;
+  border: 8rpx solid #ffffff;
+  box-sizing: border-box;
+}
+.avatar-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 120rpx;
+}
+
+.ident {
+  background: #fff;
+  text-align: center;
+  padding: 24rpx 0 8rpx;
+}
+.nick {
+  font-size: 46rpx;
+  font-weight: 800;
+}
+.handle {
+  font-size: 28rpx;
+  color: var(--text-3);
+  margin-top: 6rpx;
+}
+
+.quads {
+  background: #fff;
+  display: flex;
+  gap: 16rpx;
+  padding: 24rpx;
+}
+.quad {
+  flex: 1;
+  position: relative;
+  background: #fff;
+  border: 2rpx solid var(--line);
+  border-radius: 20rpx;
+  padding: 22rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+}
+.q-ico {
+  font-size: 30rpx;
+}
+.q-t {
+  font-size: 26rpx;
+  color: var(--text);
+}
+.q-badge {
+  position: absolute;
+  top: -10rpx;
+  right: -6rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  background: #ff9500;
+  color: #fff;
+  font-size: 20rpx;
+}
+
+.pro {
+  margin: 0 24rpx;
+  background: linear-gradient(180deg, #cfe9ff 0%, #b8dcff 100%);
+  border-radius: 24rpx;
+  padding: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pro-left {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.crown {
+  font-size: 46rpx;
+}
+.pro-t {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: #1b3c63;
+}
+.pro-s {
+  font-size: 24rpx;
+  color: #3c6b99;
+  margin-top: 4rpx;
+}
+.pro-btn {
+  background: #fff;
+  color: #1b6fd1;
+  font-size: 26rpx;
+  font-weight: 700;
+  border-radius: 999rpx;
+  padding: 14rpx 22rpx;
+}
+
+/* 未登录：注册 / 登录 */
+.guest {
+  background: #fff;
+  padding-bottom: 40rpx;
+  text-align: center;
+}
+.guest-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+}
+.logo-ring {
+  width: 250rpx;
+  height: 250rpx;
+  margin: 10rpx auto 24rpx;
+  border-radius: 60rpx;
+  background: conic-gradient(#1a73e8 0 30%, #ff9500 30% 45%, #34c759 45% 58%, #00b3b3 58% 70%, #4aa8ff 70% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.12);
+}
+.logo-face {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 999rpx;
+  background: #fff;
+  position: relative;
+}
+.logo-face .hand-h,
+.logo-face .hand-m {
+  position: absolute;
+  background: #ff7a00;
+  border-radius: 6rpx;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: bottom center;
+}
+.logo-face .hand-h {
+  width: 12rpx;
+  height: 42rpx;
+  margin-left: -6rpx;
+  transform: rotate(90deg);
+}
+.logo-face .hand-m {
+  width: 12rpx;
+  height: 56rpx;
+  margin-left: -6rpx;
+}
+.brand-name {
+  font-size: 96rpx;
+  font-weight: 800;
+  letter-spacing: 6rpx;
+  color: #4a4f55;
+}
+.brand-sub {
+  font-size: 38rpx;
+  color: #9aa0a6;
+  margin: 6rpx 0 40rpx;
+}
+.auth-btn {
+  margin: 0 100rpx 28rpx;
+  border-radius: 999rpx;
+  padding: 30rpx 0;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #fff;
+}
+.auth-btn.green {
+  background: #24c04a;
+}
+.auth-btn.blue {
+  background: #7b96e0;
+}

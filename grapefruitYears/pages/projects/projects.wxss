@@ -1,0 +1,69 @@
+/* pages/projects/projects.wxss */
+.list {
+  padding: 8rpx 28rpx;
+  margin-top: 12rpx;
+}
+.item {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+.item:last-child {
+  border-bottom: none;
+}
+.i-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38rpx;
+  margin-right: 20rpx;
+}
+.i-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 4rpx;
+}
+.i-right {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.i-hours {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--text-2);
+}
+.chev {
+  color: var(--text-3);
+  font-size: 34rpx;
+}
+.add-row {
+  text-align: center;
+  color: var(--brand);
+  font-weight: 600;
+  font-size: 30rpx;
+  padding: 32rpx;
+}
+.hero {
+  text-align: center;
+  padding: 80rpx 0 20rpx;
+}
+.hero-text {
+  color: #c8ccd0;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.tip .sub {
+  line-height: 44rpx;
+}
+
+.arch {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 600;
+}

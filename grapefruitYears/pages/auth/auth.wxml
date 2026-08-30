@@ -1,0 +1,86 @@
+<view class="page" style="padding-top:{{statusBarHeight}}px">
+  <view class="nav" style="height:{{navBarHeight}}px">
+    <view class="back" bindtap="back">‹</view>
+    <view class="title">{{isRegister ? '注册账号' : '登录'}}</view>
+    <view class="back"></view>
+  </view>
+
+  <view class="brand">
+    <view class="logo">
+      <view class="logo-ring">
+        <view class="logo-face">
+          <view class="hand-h"></view>
+          <view class="hand-m"></view>
+        </view>
+      </view>
+    </view>
+    <view class="brand-name">岁月</view>
+    <view class="brand-sub">{{isRegister ? '使用邮箱注册岁月 ID' : '岁月 ID 账号登录'}}</view>
+  </view>
+
+  <view class="card">
+    <view class="field">
+      <text class="f-label">邮箱</text>
+      <input
+        class="f-input"
+        type="text"
+        placeholder="you@example.com"
+        value="{{form.email}}"
+        confirm-type="next"
+        bindinput="onEmail"
+      />
+    </view>
+    <view class="divider"></view>
+
+    <view class="field" wx:if="{{isRegister}}">
+      <text class="f-label">昵称</text>
+      <input class="f-input" placeholder="留空则用邮箱前缀" value="{{form.nickName}}" bindinput="onNick" />
+    </view>
+    <view class="divider" wx:if="{{isRegister}}"></view>
+
+    <view class="field">
+      <text class="f-label">密码</text>
+      <input
+        class="f-input"
+        password="{{!showPwd}}"
+        placeholder="至少 6 位"
+        value="{{form.password}}"
+        bindinput="onPassword"
+      />
+      <text class="eye" bindtap="toggleEye">{{showPwd ? '🙈' : '👁'}}</text>
+    </view>
+
+    <block wx:if="{{isRegister}}">
+      <view class="divider"></view>
+      <view class="field">
+        <text class="f-label">确认密码</text>
+        <input
+          class="f-input"
+          password="{{!showPwd}}"
+          placeholder="再输入一次"
+          value="{{form.confirm}}"
+          bindinput="onConfirm"
+        />
+      </view>
+    </block>
+  </view>
+
+  <view class="tips" wx:if="{{error}}">{{error}}</view>
+
+  <block wx:if="{{isRegister}}">
+    <view class="agree" bindtap="toggleAgree">
+      <view class="box {{agree ? 'on' : ''}}">{{agree ? '✓' : ''}}</view>
+      <view class="agree-t">我已阅读并同意《用户协议》与《隐私政策》</view>
+    </view>
+    <view class="btn green" bindtap="submit">注册</view>
+    <view class="switch" bindtap="switchMode">已有账号？去登录</view>
+  </block>
+  <block wx:else>
+    <view class="btn blue" bindtap="submit">登录</view>
+    <view class="switch" bindtap="switchMode">还没有账号？去注册</view>
+    <view class="switch small" bindtap="forgot">忘记密码</view>
+  </block>
+
+  <view class="note">账号保存在微信云开发，密码只在云端加盐哈希后存储；同一邮箱在任意设备都能登录。</view>
+  <view style="height:80rpx"></view>
+</view>

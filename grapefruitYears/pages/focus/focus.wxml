@@ -1,0 +1,161 @@
+<view class="page focus-page" style="padding-top:{{statusBarHeight}}px">
+  <view class="scene"></view>
+
+  <view class="nav" style="height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px">
+    <view class="nav-ico" bindtap="goStats">☰</view>
+    <view class="head">
+      <view class="head-title">岁月<text class="light"> · 专注计时</text></view>
+      <view class="head-sub">专注能让你的效率提升 10 倍</view>
+    </view>
+    <view class="nav-ico"></view>
+  </view>
+
+  <!-- 计时进行中 -->
+  <block wx:if="{{running}}">
+    <view class="ring-wrap">
+      <view class="ring" style="background:conic-gradient({{ringColor}} {{percent}}%, rgba(255,255,255,0.28) 0)">
+        <view class="ring-in">
+          <view class="ring-mode">{{mode === 'down' ? '倒计时' : '正计时'}}</view>
+          <view class="ring-time">{{clockText}}</view>
+          <view class="ring-project">{{currentName}}</view>
+        </view>
+      </view>
+      <view class="ring-meta">已投入 {{elapsedText}}{{mode === 'down' ? ' · 目标 ' + targetText : ''}}</view>
+    </view>
+
+    <view class="run-actions">
+      <view class="run-btn ghost" bindtap="giveUp">放弃</view>
+      <view class="run-btn" bindtap="togglePause">{{paused ? '继续' : '暂停'}}</view>
+      <view class="run-btn done" bindtap="finish">结束并保存</view>
+    </view>
+  </block>
+
+  <!-- 设置计时 -->
+  <block wx:else>
+    <view class="panel">
+      <view class="picker-project" bindtap="chooseProject">
+        <text class="pp-icon">{{currentIcon}}</text>
+        <text class="pp-name">{{currentName}}</text>
+        <text class="pp-chev">⌄</text>
+      </view>
+
+      <view class="modes">
+        <view class="mode {{mode === 'up' ? 'on' : ''}}" data-mode="up" bindtap="setMode">正计时</view>
+        <view class="mode {{mode === 'down' ? 'on' : ''}}" data-mode="down" bindtap="setMode">倒计时</view>
+      </view>
+
+      <view class="dur" wx:if="{{mode === 'down'}}">
+        <picker-view class="pv" indicator-style="height:80rpx;" value="{{durValue}}" bindchange="onDurChange">
+          <picker-view-column>
+            <view class="pv-item" wx:for="{{hourRange}}" wx:key="*this">{{item}} 小时</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view class="pv-item" wx:for="{{minuteRange}}" wx:key="*this">{{item}} 分钟</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+      <view class="dur-up" wx:else>
+        <view class="dur-up-text">向上累积，随时结束</view>
+      </view>
+
+      <view class="start" bindtap="start">开启专注计时</view>
+    </view>
+
+    <view class="quick" wx:if="{{quickOn}}">
+      <view class="quick-title">点击快速开始</view>
+      <view class="quick-row">
+        <view class="q" wx:for="{{quick}}" wx:key="minutes" data-minutes="{{item.minutes}}" bindtap="quickStart">
+          {{item.text}} ›
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom">
+      <view class="ambient" bindtap="chooseAmbient">
+        <view class="amb-ico">🌊</view>
+        <view>
+          <view class="amb-label">环境音</view>
+          <view class="amb-val">{{ambient || '未选择'}}</view>
+        </view>
+      </view>
+      <view class="future">
+        <view class="future-t">FUTURE</view>
+        <view class="future-n">{{futureDays}}</view>
+        <view class="future-s">本年剩余天数</view>
+      </view>
+      <view class="adv-entry" bindtap="openAdv">
+        <view class="adv-ico">⚙️</view>
+        <view class="adv-t">高级设置</view>
+      </view>
+    </view>
+  </block>
+
+  <view style="height:180rpx"></view>
+
+  <!-- 高级设置 -->
+  <view class="mask" wx:if="{{advShow}}" bindtap="closeAdv"></view>
+  <view class="adv-sheet" wx:if="{{advShow}}">
+    <view class="adv-head">
+      <text class="adv-title">高级设置</text>
+      <text class="adv-close" bindtap="closeAdv">✕</text>
+    </view>
+
+    <view class="adv-grid">
+      <view class="adv-card" bindtap="blockApps">
+        <view class="adv-row">
+          <text class="c-ico">🖐</text>
+          <view class="c-box"></view>
+        </view>
+        <view class="c-t">禁用手机 App</view>
+        <view class="c-s">小程序无法接管系统，建议开手机自带的专注模式</view>
+      </view>
+
+      <view class="adv-card" bindtap="toggleEndSound">
+        <view class="adv-row">
+          <text class="c-ico">🔔</text>
+          <view class="c-box {{endSound !== 'off' ? 'on' : ''}}">{{endSound !== 'off' ? '✓' : ''}}</view>
+        </view>
+        <view class="c-t">{{endSound !== 'off' ? '结束提示已启用' : '结束提示已关闭'}}</view>
+        <view class="c-link" catchtap="pickEndSound">{{endSoundText}} ›</view>
+      </view>
+
+      <view class="adv-card" bindtap="toggleScreen">
+        <view class="adv-row">
+          <text class="c-ico">📱</text>
+          <view class="c-box {{keepScreenOn ? 'on' : ''}}">{{keepScreenOn ? '✓' : ''}}</view>
+        </view>
+        <view class="c-t">屏幕常亮</view>
+        <view class="c-s">建议连接电源使用，关闭时跟随系统熄屏</view>
+      </view>
+
+      <view class="adv-card" bindtap="goPro">
+        <view class="adv-row">
+          <text class="c-ico">👑</text>
+          <view class="c-pro">即刻升级</view>
+        </view>
+        <view class="c-t">升级高级会员</view>
+        <view class="c-s">更多计时主题 & 环境音</view>
+      </view>
+
+      <view class="adv-card" bindtap="toggleQuick">
+        <view class="adv-row">
+          <text class="c-ico">🪐</text>
+          <view class="c-box {{quickOn ? 'on' : ''}}">{{quickOn ? '✓' : ''}}</view>
+        </view>
+        <view class="c-t">快速启动模块</view>
+        <view class="c-link" catchtap="editQuick">设置模块时间 ›</view>
+      </view>
+
+      <view class="adv-card" bindtap="toggleHourly">
+        <view class="adv-row">
+          <text class="c-ico">⏰</text>
+          <view class="c-box {{hourlyTip ? 'on' : ''}}">{{hourlyTip ? '✓' : ''}}</view>
+        </view>
+        <view class="c-t">每小时通知</view>
+        <view class="c-s">每专注一小时告诉我（需停留在小程序）</view>
+      </view>
+    </view>
+
+    <view class="adv-done" bindtap="closeAdv">完成</view>
+  </view>
+</view>

@@ -1,10 +1,128 @@
-/**app.wxss**/
-.container {
-  height: 100%;
+/**app.wxss 全局样式**/
+page {
+  --brand: #007aff;
+  --brand-soft: #e8f2ff;
+  --orange: #ff7a45;
+  --green: #34c759;
+  --text: #17181a;
+  --text-2: #6b7075;
+  --text-3: #a4a9ae;
+  --bg: #f2f3f5;
+  --card: #ffffff;
+  --line: #eceef0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: 40rpx;
+}
+
+/* 自定义导航栏 */
+.nav {
+  padding: 0 32rpx;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 200rpx 0;
+}
+.nav-title {
+  font-size: 44rpx;
+  font-weight: 800;
+  letter-spacing: -0.5rpx;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.nav-title .light {
+  color: var(--text-2);
+  font-weight: 700;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 28rpx;
+  font-size: 40rpx;
+  color: var(--brand);
+  flex-shrink: 0;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 28rpx;
+  margin: 0 24rpx 24rpx;
+  padding: 28rpx;
   box-sizing: border-box;
-} 
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.03);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+.between {
+  justify-content: space-between;
+}
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+.muted {
+  color: var(--text-3);
+}
+.sub {
+  color: var(--text-2);
+  font-size: 24rpx;
+}
+.section-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #fff;
+  border-radius: 999rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.btn-ghost {
+  background: #fff;
+  color: var(--brand);
+  border-radius: 24rpx;
+  padding: 30rpx 0;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+.badge {
+  background: var(--green);
+  color: #fff;
+  font-size: 20rpx;
+  border-radius: 999rpx;
+  padding: 2rpx 12rpx;
+}
+.tag {
+  background: #f4f5f7;
+  color: var(--text-2);
+  font-size: 22rpx;
+  border-radius: 8rpx;
+  padding: 4rpx 12rpx;
+}
+.divider {
+  height: 1rpx;
+  background: var(--line);
+  margin: 20rpx 0;
+}
+.empty {
+  text-align: center;
+  color: var(--text-3);
+  padding: 60rpx 0;
+}

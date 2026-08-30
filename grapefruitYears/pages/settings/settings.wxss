@@ -1,0 +1,62 @@
+/* pages/settings/settings.wxss */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.back {
+  width: 60rpx;
+  font-size: 48rpx;
+}
+.title {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+.label {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.pick {
+  color: var(--brand);
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.pr {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--line);
+  font-size: 28rpx;
+}
+.pr:last-child {
+  border-bottom: none;
+}
+.pr-ico {
+  margin-right: 16rpx;
+  font-size: 32rpx;
+}
+.pr-v {
+  color: var(--text-3);
+  font-size: 26rpx;
+  margin-right: 10rpx;
+}
+.chev {
+  color: var(--text-3);
+  font-size: 34rpx;
+  padding: 0 6rpx;
+}
+.op {
+  padding: 26rpx 0;
+  border-bottom: 1rpx solid var(--line);
+  font-size: 28rpx;
+  color: var(--brand);
+}
+.op:last-child {
+  border-bottom: none;
+}
+.op.danger {
+  color: #ff3b30;
+}
+.sub {
+  line-height: 44rpx;
+}

@@ -1,0 +1,14 @@
+<view class="tabbar">
+  <view
+    wx:for="{{list}}"
+    wx:key="path"
+    class="tab {{item.center ? 'center' : ''}} {{selected === index ? 'on' : ''}}"
+    data-index="{{index}}"
+    data-path="{{item.path}}"
+    bindtap="onTap"
+  >
+    <view class="icon">{{item.icon}}</view>
+    <view wx:if="{{item.dot}}" class="dot">{{item.dot}}</view>
+    <view class="label">{{item.text}}</view>
+  </view>
+</view>

@@ -1,0 +1,52 @@
+<view class="page" style="padding-top:{{statusBarHeight}}px">
+  <view class="nav" style="height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px">
+    <view class="nav-title">岁月<text class="light"> · 我的项目</text></view>
+    <view class="nav-actions">
+      <text bindtap="goIndex">📋</text>
+      <text bindtap="addProject">＋</text>
+    </view>
+  </view>
+
+  <view class="card list" wx:if="{{projects.length}}">
+    <view
+      class="item"
+      wx:for="{{projects}}"
+      wx:key="index"
+      data-id="{{item.id}}"
+      bindtap="openProject"
+      bindlongpress="moreProject"
+    >
+      <view class="i-icon" style="background:{{item.color}}1a">{{item.icon}}</view>
+      <view class="grow">
+        <view class="i-name">{{item.name}}</view>
+        <view class="sub">{{item.recordCount}} 条记录 · 目标 {{item.targetHours}}h{{item.childCount ? ' · ' + item.childCount + ' 个小项目' : ''}}{{item.remindOn ? ' · 每日 ' + item.remindAt + ' 提醒' : ''}}</view>
+      </view>
+      <view class="i-right">
+        <text class="i-hours">{{item.totalHours}}h</text>
+        <text class="badge" wx:if="{{item.reachedPercent >= 100}}">达成</text>
+        <text class="chev">›</text>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="hero">
+    <view class="hero-text">还没有项目，先创建一个吧</view>
+  </view>
+
+  <view class="card add-row" bindtap="addProject">＋ 添加新项目</view>
+
+  <view class="card arch" wx:if="{{archivedCount}}" bindtap="openArchived">
+    <text class="grow">已归档项目</text>
+    <text class="i-hours">{{archivedCount}}</text>
+    <text class="chev">›</text>
+  </view>
+
+  <view class="card tip">
+    <view class="section-title">小提示</view>
+    <view class="sub">· 点击项目可修改名称、图标、目标小时与每日提醒</view>
+    <view class="sub">· 长按项目可快速删除</view>
+    <view class="sub">· 目标最高支持 10000 小时，可做长达 10 年的时间规划</view>
+  </view>
+
+  <view style="height:160rpx"></view>
+</view>

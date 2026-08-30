@@ -1,0 +1,150 @@
+/* pages/auth/auth.wxss */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.back {
+  width: 60rpx;
+  font-size: 48rpx;
+}
+.title {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.brand {
+  text-align: center;
+  padding: 30rpx 0 40rpx;
+}
+.logo-ring {
+  width: 180rpx;
+  height: 180rpx;
+  margin: 0 auto 20rpx;
+  border-radius: 44rpx;
+  background: conic-gradient(#1a73e8 0 30%, #ff9500 30% 45%, #34c759 45% 58%, #00b3b3 58% 70%, #4aa8ff 70% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.1);
+}
+.logo-face {
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 999rpx;
+  background: #fff;
+  position: relative;
+}
+.logo-face .hand-h,
+.logo-face .hand-m {
+  position: absolute;
+  background: #ff7a00;
+  border-radius: 4rpx;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: bottom center;
+}
+.logo-face .hand-h {
+  width: 8rpx;
+  height: 30rpx;
+  margin-left: -4rpx;
+  transform: rotate(90deg);
+}
+.logo-face .hand-m {
+  width: 8rpx;
+  height: 40rpx;
+  margin-left: -4rpx;
+}
+.brand-name {
+  font-size: 72rpx;
+  font-weight: 800;
+  letter-spacing: 4rpx;
+}
+.brand-sub {
+  font-size: 32rpx;
+  color: var(--text-3);
+  margin-top: 8rpx;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 0;
+}
+.f-label {
+  width: 150rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.f-input {
+  flex: 1;
+  font-size: 30rpx;
+  padding: 16rpx 0;
+}
+.eye {
+  font-size: 30rpx;
+  padding: 0 8rpx;
+}
+
+.tips {
+  color: #ff3b30;
+  font-size: 26rpx;
+  margin: 0 40rpx 20rpx;
+}
+
+.agree {
+  display: flex;
+  align-items: center;
+  margin: 10rpx 40rpx 28rpx;
+}
+.box {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 8rpx;
+  border: 2rpx solid #c8ccd0;
+  margin-right: 14rpx;
+  text-align: center;
+  line-height: 34rpx;
+  font-size: 24rpx;
+  color: #fff;
+}
+.box.on {
+  background: var(--green);
+  border-color: var(--green);
+}
+.agree-t {
+  font-size: 24rpx;
+  color: var(--text-2);
+}
+
+.btn {
+  margin: 0 40rpx 24rpx;
+  border-radius: 999rpx;
+  text-align: center;
+  padding: 28rpx 0;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #fff;
+}
+.btn.green {
+  background: #24c04a;
+}
+.btn.blue {
+  background: #7b96e0;
+}
+.switch {
+  text-align: center;
+  color: var(--brand);
+  font-size: 28rpx;
+  padding: 10rpx 0;
+}
+.switch.small {
+  color: var(--text-3);
+  font-size: 24rpx;
+}
+.note {
+  margin: 30rpx 40rpx 0;
+  font-size: 22rpx;
+  color: var(--text-3);
+  line-height: 36rpx;
+}

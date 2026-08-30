@@ -1,7 +1,125 @@
-<!--index.wxml-->
-<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    Weixin
+<view class="page" style="padding-top:{{statusBarHeight}}px">
+  <view class="nav" style="height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px">
+    <view class="nav-title">岁月<text class="light"> · 光阴计算</text></view>
+    <view class="nav-actions">
+      <text bindtap="goProjects">📋</text>
+      <text bindtap="goStats">⭐</text>
+    </view>
   </view>
-</scroll-view>
+
+  <!-- 未登录提示 -->
+  <view class="login-tip" wx:if="{{!loggedIn}}" bindtap="goRegister">
+    <text class="tip-ico">✉️</text>
+    <text class="grow">还没有注册岁月 ID，注册后可保留昵称头像与会员权益</text>
+    <text class="tip-btn">注册</text>
+  </view>
+
+  <!-- 周日历 -->
+  <view class="card week">
+    <view class="week-nav" bindtap="prevWeek">‹</view>
+    <view
+      wx:for="{{week}}"
+      wx:key="key"
+      class="day {{item.key === selectedDate ? 'on' : ''}} {{item.future ? 'future' : ''}}"
+      data-key="{{item.key}}"
+      bindtap="pickDay"
+    >
+      <view class="day-label">{{item.label}}</view>
+      <view class="day-num">{{item.day}}</view>
+      <view class="day-dot" wx:if="{{item.seconds > 0}}"></view>
+    </view>
+    <view class="week-nav" bindtap="nextWeek">›</view>
+  </view>
+
+  <!-- 当日总览 -->
+  <view class="card summary">
+    <view>
+      <view class="summary-title">{{selectedText}}</view>
+      <view class="sub">{{dayCount}} 条记录 · 共投入</view>
+    </view>
+    <view class="summary-time">{{dayText}}</view>
+  </view>
+
+  <!-- 空状态 -->
+  <block wx:if="{{projects.length === 0}}">
+    <view class="hero">
+      <view class="hero-clock">
+        <view class="hand-h"></view>
+        <view class="hand-m"></view>
+      </view>
+      <view class="hero-text">10000 小时成为专家！</view>
+      <view class="btn-ghost hero-btn" bindtap="addProject">＋ 添加新项目</view>
+    </view>
+  </block>
+
+  <!-- 项目列表：小项目嵌在所属大项目下面 -->
+  <block wx:else>
+    <view class="p-card" wx:for="{{projects}}" wx:key="index" style="border-left-color:{{item.color}}">
+      <view class="p-row" data-id="{{item.id}}" bindtap="openProject">
+        <text class="p-ico">{{item.icon}}</text>
+        <view class="grow">
+          <view class="p-name {{item.children.length ? 'parent' : ''}}">{{item.name}}</view>
+          <view class="p-sub-t" wx:if="{{item.todayText}}">今天已专注 {{item.todayText}}</view>
+        </view>
+        <view class="plus" style="background:{{item.color}}" data-id="{{item.id}}" catchtap="quickAdd">＋</view>
+      </view>
+
+      <view
+        class="p-kid"
+        wx:for="{{item.children}}"
+        wx:for-item="kid"
+        wx:key="index"
+        data-id="{{kid.id}}"
+        bindtap="openProject"
+      >
+        <text class="p-ico">{{kid.icon}}</text>
+        <view class="grow">
+          <view class="p-name">{{kid.name}}</view>
+          <view class="p-sub-t" wx:if="{{kid.todayText}}">今天已专注 {{kid.todayText}}</view>
+        </view>
+        <view class="plus" style="background:{{kid.color}}" data-id="{{kid.id}}" catchtap="quickAdd">＋</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 当日记录 -->
+  <view class="card" wx:if="{{records.length}}">
+    <view class="section-title">当日记录</view>
+    <view class="rec" wx:for="{{records}}" wx:key="index">
+      <view class="rec-icon">{{item.icon}}</view>
+      <view class="grow">
+        <view class="rec-name">{{item.name}}</view>
+        <view class="sub">{{item.timeText}} · {{item.modeText}}{{item.note ? ' · ' + item.note : ''}}</view>
+      </view>
+      <view class="rec-time">{{item.durText}}</view>
+      <view class="rec-del" data-id="{{item.id}}" bindtap="removeRecord">✕</view>
+    </view>
+  </view>
+
+  <view style="height:140rpx"></view>
+
+  <!-- 手动记录弹窗 -->
+  <view class="mask" wx:if="{{manualShow}}" bindtap="closeManual"></view>
+  <view class="sheet" wx:if="{{manualShow}}">
+    <view class="sheet-head">
+      <view class="sheet-pad"></view>
+      <view class="sheet-title">手动记录 · {{manualProjectName}}</view>
+      <view class="sheet-close" bindtap="closeManual">✕</view>
+    </view>
+    <picker-view
+      class="pv"
+      indicator-style="height:80rpx;"
+      value="{{manualValue}}"
+      bindchange="onManualChange"
+    >
+      <picker-view-column>
+        <view class="pv-item" wx:for="{{hourRange}}" wx:key="*this">{{item}} 小时</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view class="pv-item" wx:for="{{minuteRange}}" wx:key="*this">{{item}} 分钟</view>
+      </picker-view-column>
+    </picker-view>
+    <input class="note" placeholder="备注（可选）" value="{{manualNote}}" bindinput="onNoteInput" />
+    <view class="btn-primary" bindtap="saveManual">保存记录</view>
+  </view>
+</view>
