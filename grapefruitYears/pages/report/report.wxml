@@ -1,0 +1,80 @@
+<view class="page" style="padding-top:{{statusBarHeight}}px">
+  <view class="nav" style="height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px">
+    <view class="back" bindtap="back">‹ 返回</view>
+    <button class="share-btn" open-type="share">✈️ 分享</button>
+  </view>
+
+  <view class="card">
+    <!-- 标题 -->
+    <view class="head">
+      <view class="brand">岁月</view>
+      <view class="title">一周成绩单</view>
+      <view class="range">
+        <text class="arrow" bindtap="prevWeek">‹</text>
+        <text class="range-t">{{weekLabel}}</text>
+        <text class="arrow {{isThisWeek ? 'off' : ''}}" bindtap="nextWeek">›</text>
+      </view>
+    </view>
+
+    <!-- 打卡格子 -->
+    <view class="grid-head">
+      <view class="g-name"></view>
+      <view class="g-cell" wx:for="{{weekDays}}" wx:key="index">{{item}}</view>
+    </view>
+    <view class="grid-row" wx:for="{{rows}}" wx:key="index">
+      <view class="g-name">
+        <text class="r-ico">{{item.icon}}</text>
+        <text class="r-t {{item.summary ? 'strong' : ''}}">{{item.name}}</text>
+      </view>
+      <view
+        class="g-cell box {{cell.level > 0 ? 'on' : ''}} {{item.summary ? 'sum' : ''}}"
+        wx:for="{{item.days}}"
+        wx:for-item="cell"
+        wx:key="index"
+      >{{cell.level === 2 ? '★' : (cell.level === 1 ? '✓' : '')}}</view>
+    </view>
+
+    <!-- 本周总投入 -->
+    <view class="sec">
+      <text class="sec-ico">🏆</text>
+      <text class="sec-t">本周总投入</text>
+    </view>
+    <view class="inv" wx:for="{{invest}}" wx:key="index">
+      <view class="row between">
+        <view class="row">
+          <text class="i-ico">{{item.icon}}</text>
+          <text class="i-n {{item.summary ? 'strong' : ''}}">{{item.name}}</text>
+        </view>
+        <view class="i-v">完成 <text class="i-h">{{item.hours}}</text> 小时</view>
+      </view>
+      <view class="blocks">
+        <view
+          class="blk"
+          wx:for="{{item.blocks}}"
+          wx:for-item="b"
+          wx:key="index"
+          style="{{b ? 'background:' + item.color + ';opacity:' + b : ''}}"
+        ></view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!invest.length}}">这一周还没有记录</view>
+
+    <!-- 成就 -->
+    <view class="sec">
+      <text class="sec-ico">⭐</text>
+      <text class="sec-t">获得成就 & 时空怪兽</text>
+    </view>
+    <view class="badges">
+      <view class="badge-i {{item.got ? 'got' : ''}}" wx:for="{{badges}}" wx:key="index">
+        <view class="shield {{item.shape}}">
+          <view class="b-n">{{item.value}}</view>
+          <view class="b-u">{{item.unit}}</view>
+        </view>
+        <view class="b-s" wx:if="{{item.sub}}">{{item.sub}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="foot">数据来自本机与云端同步，仅统计本周（周一至周日）</view>
+  <view style="height:60rpx"></view>
+</view>

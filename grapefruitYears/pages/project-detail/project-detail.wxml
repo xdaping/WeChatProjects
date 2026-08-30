@@ -1,0 +1,162 @@
+<view class="page" style="padding-top:{{statusBarHeight}}px">
+  <view class="nav" style="height:{{navBarHeight}}px;padding-right:{{capsuleRight}}px">
+    <view class="back" bindtap="back">‹ 返回</view>
+    <view class="title">项目详情</view>
+    <view class="edit" bindtap="edit">✏️</view>
+  </view>
+
+  <!-- 概览 -->
+  <view class="card">
+    <view class="row between top">
+      <view class="row grow">
+        <view class="p-icon">{{project.icon}}</view>
+        <view class="p-name">{{project.name}}</view>
+      </view>
+      <view class="total">
+        <view class="total-n">{{stats.totalHours}}</view>
+        <view class="total-u">hours</view>
+      </view>
+    </view>
+
+    <view class="metrics">
+      <view class="m">
+        <view class="m-n {{stats.dayCount ? '' : 'dim'}}">{{stats.dayCount ? stats.dayCount : '--'}}</view>
+        <view class="m-l">坚持天数</view>
+      </view>
+      <view class="m">
+        <view class="m-n">{{stats.weeklyHours}}<text class="u">h</text></view>
+        <view class="m-l">平均每周</view>
+      </view>
+      <view class="m">
+        <view class="m-n">{{stats.last7Hours}}<text class="u">h</text></view>
+        <view class="m-l">最近 7 天</view>
+      </view>
+      <view class="m">
+        <view class="m-n">{{stats.milestoneNeed}}<text class="u">h</text></view>
+        <view class="m-l">距离里程碑</view>
+      </view>
+    </view>
+
+    <view class="months">
+      <view class="m-row" wx:for="{{months}}" wx:key="key">
+        <view class="m-label">{{item.label}}</view>
+        <view class="m-cells">
+          <view class="m-cell l{{cell.level}}" wx:for="{{item.days}}" wx:for-item="cell" wx:key="key"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="acts">
+      <view class="act" bindtap="openManual">＋ 记录时间</view>
+      <view class="act" bindtap="startFocus">🏆 开始专注</view>
+      <view class="act box" bindtap="togglePlan">🎁</view>
+    </view>
+  </view>
+
+  <!-- 小项目 -->
+  <view class="card">
+    <view class="row sec-head">
+      <text class="sec-ico">🪐</text>
+      <text class="sec-t">小项目 · 细分成多个项目</text>
+    </view>
+    <view class="divider"></view>
+    <view class="sub" wx:for="{{children}}" wx:key="index" data-id="{{item.id}}" bindtap="openChild">
+      <text class="s-ico">{{item.icon}}</text>
+      <view class="grow">
+        <view class="s-n">{{item.name}}</view>
+        <view class="s-m">累计 {{item.totalHours}} 小时{{item.targetHours ? ' · 目标 ' + item.targetHours + 'h' : ''}}</view>
+      </view>
+      <text class="chev">›</text>
+    </view>
+    <view class="add-sub" bindtap="addChild">＋ 添加小项目</view>
+  </view>
+
+  <!-- 成就与计划 -->
+  <view class="card">
+    <view class="row between" bindtap="togglePlan">
+      <view class="row">
+        <text class="sec-ico">⭐</text>
+        <text class="sec-t">成就与计划</text>
+      </view>
+      <text class="chev">{{planOpen ? '⌄' : '›'}}</text>
+    </view>
+
+    <block wx:if="{{planOpen}}">
+      <view class="divider"></view>
+      <view class="plan-line">目标 <text class="strong">{{project.targetHours}}</text> 小时 · 已完成 <text class="strong">{{stats.targetPercent}}%</text></view>
+      <view class="bar">
+        <view class="bar-in" style="width:{{stats.targetPercent}}%;background:{{project.color}}"></view>
+      </view>
+      <view class="plan-eta">{{stats.etaText}}</view>
+
+      <view class="divider"></view>
+      <view class="ms" wx:for="{{milestones}}" wx:key="hours">
+        <text class="ms-ico">{{item.done ? '🏅' : '🔒'}}</text>
+        <text class="grow {{item.done ? '' : 'muted'}}">{{item.hours}} 小时</text>
+        <text class="ms-v">{{item.done ? '已达成' : '还差 ' + item.needText}}</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 投入趋势 -->
+  <view class="card">
+    <view class="tabs">
+      <view
+        class="tab {{trend === item.key ? 'on' : ''}}"
+        wx:for="{{trendTabs}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        bindtap="switchTrend"
+      >{{item.text}}</view>
+    </view>
+
+    <view class="chart" wx:if="{{hasData}}">
+      <view class="c-col" wx:for="{{series}}" wx:key="key">
+        <view class="c-val">{{item.text}}</view>
+        <view class="c-bar" style="height:{{item.height}}%;background:{{item.height > 0 ? project.color : '#eceef0'}}"></view>
+        <view class="c-lab">{{item.label}}</view>
+      </view>
+    </view>
+    <view class="empty" wx:else>最近没有记录</view>
+    <view class="divider"></view>
+    <view class="chart-sum">{{trendSummary}}</view>
+  </view>
+
+  <!-- 最近记录 -->
+  <view class="card" wx:if="{{recent.length}}">
+    <view class="sec-t">最近记录</view>
+    <view class="rec" wx:for="{{recent}}" wx:key="index">
+      <view class="grow">
+        <view class="rec-n">{{item.projectName}}</view>
+        <view class="s-m">{{item.dateText}} {{item.timeText}} · {{item.modeText}}{{item.note ? ' · ' + item.note : ''}}</view>
+      </view>
+      <text class="rec-t">{{item.durText}}</text>
+      <text class="rec-x" data-id="{{item.id}}" bindtap="removeRecord">✕</text>
+    </view>
+  </view>
+
+  <view style="height:200rpx"></view>
+
+  <!-- 底部操作 -->
+  <view class="footer">
+    <button class="f-btn ghost" open-type="share">✈️ 分享</button>
+    <view class="f-btn main" bindtap="archive">归档此项目</view>
+  </view>
+
+  <!-- 手动记录 -->
+  <view class="mask" wx:if="{{manualShow}}" bindtap="closeManual"></view>
+  <view class="sheet" wx:if="{{manualShow}}">
+    <view class="sheet-title">记录时间 · {{manualName}}</view>
+    <picker-view class="pv" indicator-style="height:80rpx;" value="{{manualValue}}" bindchange="onManualChange">
+      <picker-view-column>
+        <view class="pv-item" wx:for="{{hourRange}}" wx:key="*this">{{item}} 小时</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view class="pv-item" wx:for="{{minuteRange}}" wx:key="*this">{{item}} 分钟</view>
+      </picker-view-column>
+    </picker-view>
+    <view class="pick-target" wx:if="{{children.length}}" bindtap="pickTarget">记到：{{manualName}} ⌄</view>
+    <input class="note" placeholder="备注（可选）" value="{{manualNote}}" bindinput="onNoteInput" />
+    <view class="btn-primary" bindtap="saveManual">保存记录</view>
+  </view>
+</view>

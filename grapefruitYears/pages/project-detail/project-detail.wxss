@@ -1,0 +1,376 @@
+/* pages/project-detail/project-detail.wxss */
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.back {
+  color: var(--brand);
+  font-size: 32rpx;
+  width: 140rpx;
+}
+.title {
+  /* 绝对居中，不受右侧胶囊留白影响；不拦截点击 */
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+.edit {
+  width: 140rpx;
+  text-align: right;
+  font-size: 38rpx;
+}
+
+/* 概览 */
+.top {
+  align-items: flex-start;
+}
+.p-icon {
+  font-size: 56rpx;
+  margin-right: 20rpx;
+}
+.p-name {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+.total {
+  text-align: right;
+}
+.total-n {
+  font-size: 60rpx;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 64rpx;
+}
+.total-u {
+  font-size: 26rpx;
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.metrics {
+  display: flex;
+  margin: 30rpx 0 24rpx;
+}
+.m {
+  flex: 1;
+  text-align: center;
+}
+.m-n {
+  font-size: 40rpx;
+  font-weight: 800;
+  color: var(--brand);
+}
+.m-n.dim {
+  color: var(--text-3);
+}
+.m-n .u {
+  font-size: 24rpx;
+  font-weight: 700;
+}
+.m-l {
+  font-size: 22rpx;
+  color: var(--text-3);
+  margin-top: 4rpx;
+}
+
+.m-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+}
+.m-label {
+  width: 60rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+.m-cells {
+  flex: 1;
+  display: flex;
+  gap: 4rpx;
+}
+.m-cell {
+  flex: 1;
+  height: 20rpx;
+  border-radius: 4rpx;
+  background: #eceef0;
+}
+.m-cell.l1 { background: #cde3ff; }
+.m-cell.l2 { background: #8cc2ff; }
+.m-cell.l3 { background: #3d9bff; }
+.m-cell.l4 { background: #0062cc; }
+
+.acts {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+.act {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  border: 2rpx solid var(--line);
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text);
+}
+.act.box {
+  flex: 0 0 120rpx;
+  font-size: 34rpx;
+}
+
+/* 小项目 / 成就 */
+.sec-head {
+  align-items: center;
+}
+.sec-ico {
+  font-size: 34rpx;
+  margin-right: 14rpx;
+}
+.sec-t {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.sub {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+.s-ico {
+  font-size: 34rpx;
+  margin-right: 16rpx;
+}
+.s-n {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.s-m {
+  font-size: 22rpx;
+  color: var(--text-3);
+  margin-top: 4rpx;
+}
+.chev {
+  color: var(--text-3);
+  font-size: 34rpx;
+}
+.add-sub {
+  margin-top: 24rpx;
+  background: #24c04a;
+  color: #fff;
+  border-radius: 20rpx;
+  text-align: center;
+  padding: 28rpx 0;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.plan-line {
+  font-size: 28rpx;
+  color: var(--text-2);
+  margin-bottom: 12rpx;
+}
+.strong {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: var(--text);
+}
+.bar {
+  height: 14rpx;
+  border-radius: 999rpx;
+  background: #f0f1f3;
+  overflow: hidden;
+}
+.bar-in {
+  height: 100%;
+  border-radius: 999rpx;
+}
+.plan-eta {
+  font-size: 24rpx;
+  color: var(--text-3);
+  margin-top: 10rpx;
+}
+.ms {
+  display: flex;
+  align-items: center;
+  padding: 14rpx 0;
+  font-size: 28rpx;
+}
+.ms-ico {
+  margin-right: 14rpx;
+  font-size: 30rpx;
+}
+.ms-v {
+  font-size: 24rpx;
+  color: var(--text-3);
+}
+
+/* 趋势 */
+.tabs {
+  display: flex;
+  background: #f4f5f7;
+  border-radius: 18rpx;
+  padding: 6rpx;
+  margin-bottom: 24rpx;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 26rpx;
+  color: var(--text-3);
+  border-radius: 14rpx;
+}
+.tab.on {
+  background: #fff;
+  color: var(--text);
+  font-weight: 700;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+.chart {
+  display: flex;
+  align-items: flex-end;
+  height: 300rpx;
+  gap: 10rpx;
+}
+.c-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+.c-val {
+  font-size: 18rpx;
+  color: var(--text-3);
+  margin-bottom: 6rpx;
+}
+.c-bar {
+  width: 100%;
+  max-width: 48rpx;
+  border-radius: 10rpx 10rpx 0 0;
+  min-height: 6rpx;
+}
+.c-lab {
+  font-size: 20rpx;
+  color: var(--text-3);
+  margin-top: 10rpx;
+}
+.chart-sum {
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+/* 最近记录 */
+.rec {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid var(--line);
+}
+.rec:last-child {
+  border-bottom: none;
+}
+.rec-n {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.rec-t {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--text-2);
+  margin: 0 16rpx;
+}
+.rec-x {
+  color: var(--text-3);
+  font-size: 26rpx;
+  padding: 8rpx;
+}
+
+/* 底部 */
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx 24rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1rpx solid var(--line);
+}
+.f-btn {
+  flex: 1;
+  text-align: center;
+  padding: 26rpx 0;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+}
+.f-btn.ghost {
+  background: #fff;
+  color: var(--text);
+  border: 2rpx solid var(--line);
+}
+.f-btn.ghost::after {
+  border: none;
+}
+.f-btn.main {
+  background: #7ba7e8;
+  color: #fff;
+}
+
+/* 弹窗 */
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+}
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 201;
+  background: #fff;
+  border-radius: 32rpx 32rpx 0 0;
+  padding: 32rpx 32rpx calc(40rpx + env(safe-area-inset-bottom));
+}
+.sheet-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  text-align: center;
+}
+.pv {
+  height: 300rpx;
+}
+.pv-item {
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+.pick-target {
+  text-align: center;
+  color: var(--brand);
+  font-size: 26rpx;
+  padding: 8rpx 0;
+}
+.note {
+  background: #f4f5f7;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  font-size: 28rpx;
+  margin: 20rpx 0 28rpx;
+}
